@@ -6,7 +6,7 @@
   "builds": [
     {
       "src": "./dist/index.js",
-      "use": "@vercel/mode"
+      "use": "@vercel/node"
     }
   ],
   "routes": [

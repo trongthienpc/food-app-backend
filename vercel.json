@@ -3,7 +3,7 @@
   "buildCommand": "yarn build",
   "devCommand": "yarn dev",
   "outputDirectory": "dist",
-  "build": [
+  "builds": [
     {
       "src": "./dist/index.js",
       "use": "@vercel/mode"

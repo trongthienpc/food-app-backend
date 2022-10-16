@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon --watch app --watch libs src/index.ts",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "build": "tsc --watch"
   },
   "devDependencies": {
     "@types/express": "^4.17.14",

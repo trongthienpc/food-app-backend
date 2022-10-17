@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import {
-  checkUserNameExist,
+  checkUsernameExist,
   tokenRefresh,
   userLogin,
   userRegister,
@@ -29,7 +29,7 @@ authenticationRouter.get(
   "/user-exist",
   async (req: Request, res: Response, next: any) => {
     let params = req.query;
-    let response = await checkUserNameExist(params);
+    let response = await checkUsernameExist(params);
     res.json(response);
   }
 );

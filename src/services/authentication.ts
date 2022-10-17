@@ -12,7 +12,7 @@ import { Request, Response } from "express";
 const prisma = new PrismaClient();
 
 // check username already exist
-const checkUserNameExist = async (query: any) => {
+const checkUsernameExist = async (query: any) => {
   const user = await prisma.users.findUnique({
     where: {
       id: query,
@@ -21,7 +21,7 @@ const checkUserNameExist = async (query: any) => {
 
   if (user) return USERNAME_EXIST;
 
-  return "OK";
+  return true;
 };
 
 // check email already exist
@@ -34,7 +34,7 @@ const checkEmailExist = async (query: string) => {
 
   if (user) return EMAIL_EXIST;
 
-  return "OK";
+  return true;
 };
 
 // user register
@@ -45,6 +45,15 @@ const userRegister = async (user: any) => {
         status: false,
         message: "Please fill up all the required information",
       };
+
+    // check email already exist
+    const emailStatus = await checkEmailExist(user?.email);
+    if (emailStatus !== true) return { status: false, message: EMAIL_EXIST };
+
+    // check username already exist
+    const usernameStatus = await checkUsernameExist(user?.username);
+    if (usernameStatus !== true)
+      return { status: false, message: USERNAME_EXIST };
 
     const passwordHash = await bcrypt.hash(user?.password, 10);
     let userObject = {
@@ -248,5 +257,5 @@ export {
   userRegister,
   userLogin,
   checkEmailExist,
-  checkUserNameExist,
+  checkUsernameExist,
 };

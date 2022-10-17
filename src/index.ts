@@ -24,18 +24,6 @@ async function addFood(food: Food) {
 }
 
 app.get("/", async (req: Request, res: Response) => {
-  const food = {
-    restaurantId: "100",
-    name: "McSpicy Paneer",
-    price: 210.0,
-    image: "mcspicypaneer",
-    category: "Burgers & Wraps",
-    description:
-      "Crispy and spicy paneer patty with creamy tandoori sauce and crispy lettuce topping.",
-    ingredients:
-      "Quarter pounder bun crown, Shredded lettuce, Tandoori mayo, Spicy paneer patty, Quarter pounder bun heel.",
-  };
-  await addFood(food);
   const foods = await prisma.foods.findMany({});
   res.send(foods);
 });

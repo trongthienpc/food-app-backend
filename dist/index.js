@@ -29,16 +29,6 @@ function addFood(food) {
     });
 }
 app.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const food = {
-        restaurantId: "100",
-        name: "McSpicy Paneer",
-        price: 210.0,
-        image: "mcspicypaneer",
-        category: "Burgers & Wraps",
-        description: "Crispy and spicy paneer patty with creamy tandoori sauce and crispy lettuce topping.",
-        ingredients: "Quarter pounder bun crown, Shredded lettuce, Tandoori mayo, Spicy paneer patty, Quarter pounder bun heel.",
-    };
-    yield addFood(food);
     const foods = yield prisma.foods.findMany({});
     res.send(foods);
 }));

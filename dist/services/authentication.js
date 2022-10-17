@@ -12,14 +12,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.checkUserNameExist = exports.checkEmailExist = exports.userLogin = exports.userRegister = exports.tokenVerification = exports.tokenRefresh = void 0;
+exports.checkUsernameExist = exports.checkEmailExist = exports.userLogin = exports.userRegister = exports.tokenVerification = exports.tokenRefresh = void 0;
 const constants_1 = require("./../configs/constants");
 const client_1 = require("@prisma/client");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const prisma = new client_1.PrismaClient();
 // check username already exist
-const checkUserNameExist = (query) => __awaiter(void 0, void 0, void 0, function* () {
+const checkUsernameExist = (query) => __awaiter(void 0, void 0, void 0, function* () {
     const user = yield prisma.users.findUnique({
         where: {
             id: query,
@@ -27,9 +27,9 @@ const checkUserNameExist = (query) => __awaiter(void 0, void 0, void 0, function
     });
     if (user)
         return constants_1.USERNAME_EXIST;
-    return "OK";
+    return true;
 });
-exports.checkUserNameExist = checkUserNameExist;
+exports.checkUsernameExist = checkUsernameExist;
 // check email already exist
 const checkEmailExist = (query) => __awaiter(void 0, void 0, void 0, function* () {
     const user = yield prisma.users.findFirst({
@@ -39,7 +39,7 @@ const checkEmailExist = (query) => __awaiter(void 0, void 0, void 0, function* (
     });
     if (user)
         return constants_1.EMAIL_EXIST;
-    return "OK";
+    return true;
 });
 exports.checkEmailExist = checkEmailExist;
 // user register
@@ -51,6 +51,14 @@ const userRegister = (user) => __awaiter(void 0, void 0, void 0, function* () {
                 status: false,
                 message: "Please fill up all the required information",
             };
+        // check email already exist
+        const emailStatus = yield checkEmailExist(user === null || user === void 0 ? void 0 : user.email);
+        if (emailStatus != true)
+            return { status: false, message: constants_1.EMAIL_EXIST };
+        // check username already exist
+        const usernameStatus = yield checkUsernameExist(user === null || user === void 0 ? void 0 : user.username);
+        if (usernameStatus != true)
+            return { status: false, message: constants_1.USERNAME_EXIST };
         const passwordHash = yield bcrypt_1.default.hash(user === null || user === void 0 ? void 0 : user.password, 10);
         let userObject = {
             username: user === null || user === void 0 ? void 0 : user.username,

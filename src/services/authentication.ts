@@ -48,11 +48,11 @@ const userRegister = async (user: any) => {
 
     // check email already exist
     const emailStatus = await checkEmailExist(user?.email);
-    if (emailStatus !== true) return { status: false, message: EMAIL_EXIST };
+    if (emailStatus != true) return { status: false, message: EMAIL_EXIST };
 
     // check username already exist
     const usernameStatus = await checkUsernameExist(user?.username);
-    if (usernameStatus !== true)
+    if (usernameStatus != true)
       return { status: false, message: USERNAME_EXIST };
 
     const passwordHash = await bcrypt.hash(user?.password, 10);

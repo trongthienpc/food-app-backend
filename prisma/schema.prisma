@@ -19,9 +19,20 @@ model foods {
 }
 
 model restaurants {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  name       String?
+  type       String?
+  tags       String[]
+  location   String?
+  distance   String?
+  time       Int?
+  image      String?
+  categories String[]
 }
 
 model users {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  username String
+  password String
+  email    String
 }

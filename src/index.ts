@@ -1,32 +1,20 @@
 import express, { Express, Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
+import cookieParser from "cookie-parser";
 const app: Express = express();
 const prisma = new PrismaClient();
 import dotenv from "dotenv";
+import authenticationRouter from "./routes/authentication";
 dotenv.config();
 
-interface Food {
-  id?: string;
-  restaurantId?: string;
-  name?: string;
-  price?: number;
-  image?: string;
-  category: string;
-  description?: string;
-  ingredients?: string;
-}
-
-async function addFood(food: Food) {
-  const entity = await prisma.foods.create({
-    data: food,
-  });
-  return entity;
-}
+app.use(express.json());
+app.use(cookieParser());
 
 app.get("/", async (req: Request, res: Response) => {
-  const foods = await prisma.foods.findMany({});
-  res.send(foods);
+  res.send("Server is started");
 });
+
+app.use("/api/user", authenticationRouter);
 const port = process.env.PORT || 8080;
 app.listen(port, () => {
   console.log(`Server is listening on ${port}`);

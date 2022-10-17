@@ -6,7 +6,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 interface Food {
-  id: string;
+  id?: string;
   restaurantId?: string;
   name?: string;
   price?: number;
@@ -25,7 +25,6 @@ async function addFood(food: Food) {
 
 app.get("/", async (req: Request, res: Response) => {
   const food = {
-    id: "2000",
     restaurantId: "100",
     name: "McSpicy Chicken",
     price: 220.0,

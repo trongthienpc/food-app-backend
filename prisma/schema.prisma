@@ -8,13 +8,14 @@ datasource db {
 }
 
 model foods {
-  id          String  @id @default(auto()) @map("_id") @db.ObjectId
-  name        String?
-  price       Float?
-  image       String?
-  category    String?
-  description String?
-  ingredients String?
+  id           String  @id @default(auto()) @map("_id") @db.ObjectId
+  name         String?
+  restaurantId String?
+  price        Float?
+  image        String?
+  category     String?
+  description  String?
+  ingredients  String?
 }
 
 model restaurants {

@@ -20,7 +20,26 @@ exports.app = app;
 const prisma = new client_1.PrismaClient();
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
+function addFood(food) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const entity = yield prisma.foods.create({
+            data: food,
+        });
+        return entity;
+    });
+}
 app.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const food = {
+        id: "2000",
+        restaurantId: "100",
+        name: "McSpicy Chicken",
+        price: 220.0,
+        image: "mcspicychicken",
+        category: "Burgers & Wraps",
+        description: "Zesty and redolent whole muscle leg meat patty: Fried to perfect golden tan; quenched with creamy veg mayo and garden-fresh shredded iceberg lettuce. The sandwich is served in fresh, sesame-studded quarter pounder bun.",
+        ingredients: "Quarter pounder bun crown, Veg sauce, Shredded lettuce, McSpicy chicken patty, Quarter pounder bun heel.",
+    };
+    addFood(food);
     const foods = yield prisma.foods.findMany({});
     res.send(foods);
 }));

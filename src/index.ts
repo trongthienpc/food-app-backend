@@ -36,7 +36,7 @@ app.get("/", async (req: Request, res: Response) => {
     ingredients:
       "Quarter pounder bun crown, Veg sauce, Shredded lettuce, McSpicy chicken patty, Quarter pounder bun heel.",
   };
-  addFood(food);
+  await addFood(food);
   const foods = await prisma.foods.findMany({});
   res.send(foods);
 });

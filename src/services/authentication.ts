@@ -13,9 +13,9 @@ const prisma = new PrismaClient();
 
 // check username already exist
 const checkUsernameExist = async (query: any) => {
-  const user = await prisma.users.findUnique({
+  const user = await prisma.users.findFirst({
     where: {
-      id: query,
+      username: query,
     },
   });
 

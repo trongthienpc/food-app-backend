@@ -20,9 +20,9 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const prisma = new client_1.PrismaClient();
 // check username already exist
 const checkUsernameExist = (query) => __awaiter(void 0, void 0, void 0, function* () {
-    const user = yield prisma.users.findUnique({
+    const user = yield prisma.users.findFirst({
         where: {
-            id: query,
+            username: query,
         },
     });
     if (user)

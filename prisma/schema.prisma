@@ -1,0 +1,21 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model foods {
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+}
+
+model restaurants {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+}
+
+model users {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+}

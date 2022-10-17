@@ -18,6 +18,28 @@ const client_1 = require("@prisma/client");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const prisma = new client_1.PrismaClient();
+// check [type] is exist
+const checkUserExist = (query) => __awaiter(void 0, void 0, void 0, function* () {
+    let messages = {
+        email: constants_1.EMAIL_EXIST,
+        username: constants_1.USERNAME_EXIST,
+    };
+    try {
+        let queryType = Object.keys(query)[0];
+        let userObject = yield prisma.users.findFirst({
+            where: query,
+        });
+        return !userObject
+            ? { status: true, message: `This ${queryType} is not taken` }
+            : {
+                status: false,
+                message: messages[queryType],
+            };
+    }
+    catch (error) {
+        console.log(error);
+    }
+});
 // check username already exist
 const checkUsernameExist = (query) => __awaiter(void 0, void 0, void 0, function* () {
     const user = yield prisma.users.findFirst({

@@ -11,6 +11,30 @@ import { Request, Response } from "express";
 
 const prisma = new PrismaClient();
 
+// check [type] is exist
+const checkUserExist = async (query: any) => {
+  let messages = {
+    email: EMAIL_EXIST,
+    username: USERNAME_EXIST,
+  };
+
+  try {
+    let queryType = Object.keys(query)[0];
+    let userObject = await prisma.users.findFirst({
+      where: query,
+    });
+
+    return !userObject
+      ? { status: true, message: `This ${queryType} is not taken` }
+      : {
+          status: false,
+          message: messages[queryType as keyof typeof messages],
+        };
+  } catch (error: any) {
+    console.log(error);
+  }
+};
+
 // check username already exist
 const checkUsernameExist = async (query: any) => {
   const user = await prisma.users.findFirst({

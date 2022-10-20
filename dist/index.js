@@ -16,6 +16,7 @@ exports.app = void 0;
 const express_1 = __importDefault(require("express"));
 const client_1 = require("@prisma/client");
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
+const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
 exports.app = app;
 const prisma = new client_1.PrismaClient();
@@ -24,6 +25,7 @@ const authentication_1 = __importDefault(require("./routes/authentication"));
 dotenv_1.default.config();
 app.use(express_1.default.json());
 app.use((0, cookie_parser_1.default)());
+app.use((0, cors_1.default)());
 app.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.send("Server is started");
 }));

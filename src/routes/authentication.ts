@@ -1,5 +1,6 @@
 import express, { Request, Response } from "express";
 import {
+  checkUserExist,
   checkUsernameExist,
   tokenRefresh,
   userLogin,
@@ -7,15 +8,18 @@ import {
 } from "../services/authentication";
 var authenticationRouter = express.Router();
 
+// user registration
 authenticationRouter.post(
   "/register",
   async (req: Request, res: Response, next: any) => {
     let body = req.body;
+    console.log(`authenticationRouter | register`);
     let response = await userRegister(body);
-    res.json(response);
+    return res.status(200).json(response);
   }
 );
 
+// user login
 authenticationRouter.post(
   "/login",
   async (req: Request, res: Response, next: any) => {
@@ -25,11 +29,13 @@ authenticationRouter.post(
   }
 );
 
+// user exist
 authenticationRouter.get(
   "/user-exist",
   async (req: Request, res: Response, next: any) => {
     let params = req.query;
-    let response = await checkUsernameExist(params);
+    console.log(params);
+    let response = await checkUserExist(params);
     res.json(response);
   }
 );

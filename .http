@@ -2,9 +2,9 @@ POST http://localhost:8080/api/user/register
 Content-Type: application/json
 
 {
-  "username": "user2",
-  "password": "user1",
-  "email": "user4@gmail.com"
+  "username": "u2",
+  "email": "u2@gmail.com",
+  "password": "user"
 }
 
 ################################
@@ -26,3 +26,20 @@ Content-Type: application/json
     "email": "user5@gmail.com"
 }
 
+################################
+POST https://food-app-be.vercel.app/api/user/login
+Content-Type: application/json
+
+{
+    "username": "user2",
+    "password": "user2",
+    "email": "user5@gmail.com"
+}
+
+################################
+GET http://localhost:8080/api/user/user-exist
+Content-Type: application/json
+
+{
+    "email": "user"
+}

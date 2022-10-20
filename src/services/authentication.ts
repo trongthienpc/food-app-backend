@@ -17,7 +17,7 @@ const checkUserExist = async (query: any) => {
     email: EMAIL_EXIST,
     username: USERNAME_EXIST,
   };
-
+  // console.log(query);
   try {
     let queryType = Object.keys(query)[0];
     let userObject = await prisma.users.findFirst({
@@ -64,6 +64,7 @@ const checkEmailExist = async (query: string) => {
 // user register
 const userRegister = async (user: any) => {
   try {
+    console.log(`Authentication | user registration`);
     if (!user?.username || !user?.password || !user?.email)
       return {
         status: false,
@@ -282,4 +283,5 @@ export {
   userLogin,
   checkEmailExist,
   checkUsernameExist,
+  checkUserExist,
 };

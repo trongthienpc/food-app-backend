@@ -27,7 +27,8 @@ authenticationRouter.post("/login", (req, res, next) => __awaiter(void 0, void 0
 }));
 authenticationRouter.get("/user-exist", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     let params = req.query;
-    let response = yield (0, authentication_1.checkUsernameExist)(params);
+    console.log(params);
+    let response = yield (0, authentication_1.checkUserExist)(params);
     res.json(response);
 }));
 authenticationRouter.post("/refresh-token", authentication_1.tokenRefresh);

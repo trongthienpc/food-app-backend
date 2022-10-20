@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.checkUsernameExist = exports.checkEmailExist = exports.userLogin = exports.userRegister = exports.tokenVerification = exports.tokenRefresh = void 0;
+exports.checkUserExist = exports.checkUsernameExist = exports.checkEmailExist = exports.userLogin = exports.userRegister = exports.tokenVerification = exports.tokenRefresh = void 0;
 const constants_1 = require("./../configs/constants");
 const client_1 = require("@prisma/client");
 const bcrypt_1 = __importDefault(require("bcrypt"));
@@ -24,6 +24,7 @@ const checkUserExist = (query) => __awaiter(void 0, void 0, void 0, function* ()
         email: constants_1.EMAIL_EXIST,
         username: constants_1.USERNAME_EXIST,
     };
+    console.log(query);
     try {
         let queryType = Object.keys(query)[0];
         let userObject = yield prisma.users.findFirst({
@@ -40,6 +41,7 @@ const checkUserExist = (query) => __awaiter(void 0, void 0, void 0, function* ()
         console.log(error);
     }
 });
+exports.checkUserExist = checkUserExist;
 // check username already exist
 const checkUsernameExist = (query) => __awaiter(void 0, void 0, void 0, function* () {
     const user = yield prisma.users.findFirst({

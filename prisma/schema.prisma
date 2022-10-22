@@ -7,32 +7,40 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+type RestaurantsImages {
+  cover  String
+  logo   String
+  poster String
+}
+
 model foods {
   id           String  @id @default(auto()) @map("_id") @db.ObjectId
-  name         String?
-  restaurantId String?
-  price        Float?
-  image        String?
-  category     String?
+  category     String
   description  String?
+  id_          String  @map("id")
+  image        String
   ingredients  String?
+  name         String
+  price        Int
+  restaurantId String
 }
 
 model restaurants {
-  id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  name       String?
-  type       String?
-  tags       String[]
-  location   String?
-  distance   String?
-  time       Int?
-  image      String?
+  id         String            @id @default(auto()) @map("_id") @db.ObjectId
   categories String[]
+  distance   Int
+  id_        String            @map("id")
+  images     RestaurantsImages
+  location   String
+  name       String
+  tags       String[]
+  time       Int
+  type       String
 }
 
 model users {
   id       String @id @default(auto()) @map("_id") @db.ObjectId
-  username String
-  password String
   email    String
+  password String
+  username String
 }

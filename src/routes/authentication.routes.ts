@@ -41,6 +41,7 @@ authenticationRouter.get(
   }
 );
 
+// refresh token
 authenticationRouter.post("/refresh-token", tokenRefresh);
 
 export default authenticationRouter;

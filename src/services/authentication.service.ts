@@ -222,6 +222,7 @@ const tokenRefresh = async (req: Request, res: any) => {
   console.log(`authentication.service | tokenRefresh | ${req?.originalUrl}`);
   try {
     let token = req?.headers["authorization"];
+    console.log(token);
     if (token && token.startsWith("Bearer ")) {
       token = token.slice(7, token?.length);
       jwt.verify(

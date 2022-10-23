@@ -18,7 +18,7 @@ app.use(cookieParser());
 app.use(express.static("./src/static"));
 
 // verify logged in user
-app.use("*", tokenVerification);
+// app.use("*", tokenVerification);
 
 // routes
 app.use("/", indexRouter);

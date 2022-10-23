@@ -214,6 +214,7 @@ const tokenRefresh = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     console.log(`authentication.service | tokenRefresh | ${req === null || req === void 0 ? void 0 : req.originalUrl}`);
     try {
         let token = req === null || req === void 0 ? void 0 : req.headers["authorization"];
+        console.log(token);
         if (token && token.startsWith("Bearer ")) {
             token = token.slice(7, token === null || token === void 0 ? void 0 : token.length);
             jsonwebtoken_1.default.verify(token, process.env.TOKEN_SECRET || "", {

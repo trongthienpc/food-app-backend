@@ -9,6 +9,7 @@ import restaurantRouter from "./routes/restaurant.routes";
 import userRouter from "./routes/user.routes";
 import { tokenVerification } from "./services/authentication.service";
 import foodRouter from "./routes/food.routes";
+import testRouter from "./routes/test.routes";
 dotenv.config();
 
 app.use(express.json());
@@ -24,6 +25,7 @@ app.use(express.static("./src/static"));
 app.use("/", indexRouter);
 
 app.use("/api", authenticationRouter);
+app.use("/api/test", testRouter);
 app.use("/api/restaurant", restaurantRouter);
 app.use("/api/food", foodRouter);
 app.use("/api/user", userRouter);

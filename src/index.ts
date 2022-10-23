@@ -28,9 +28,9 @@ app.use("/api/restaurant", restaurantRouter);
 app.use("/api/food", foodRouter);
 app.use("/api/user", userRouter);
 // catch 404 and forward to error handler
-// app.use(function (req, res, next) {
-//   next(res.status(404).send("Sorry, the page was not found"));
-// });
+app.use(function (req, res, next) {
+  next(res.status(404).send("Sorry, the page was not found page 404 "));
+});
 
 const port = process.env.PORT || 8080;
 app.listen(port, () => {

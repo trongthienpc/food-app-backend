@@ -25,8 +25,8 @@ authenticationRouter.post("/register", (req, res, next) => __awaiter(void 0, voi
 // user login
 authenticationRouter.post("/login", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     let body = req.body;
-    console.log(`Authentication.routes | login : ${JSON.stringify(body)}`);
     let response = yield (0, authentication_service_1.userLogin)(body);
+    console.log(`Authentication.routes | login : ${JSON.stringify(response)}`);
     res.json(response);
 }));
 // user exist
@@ -36,5 +36,6 @@ authenticationRouter.get("/user-exist", (req, res, next) => __awaiter(void 0, vo
     let response = yield (0, authentication_service_1.checkUserExist)(params);
     res.json(response);
 }));
+// refresh token
 authenticationRouter.post("/refresh-token", authentication_service_1.tokenRefresh);
 exports.default = authenticationRouter;
